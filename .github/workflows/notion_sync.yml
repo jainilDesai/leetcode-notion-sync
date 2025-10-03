@@ -1,0 +1,44 @@
+name: Sync LeetHub to Notion (MVP)
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Compute changed files (handles normal + first push)
+        run: |
+          set -e
+          if [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > changed.txt
+          else
+            git diff --name-only HEAD^ HEAD > changed.txt || true
+          fi
+          echo "Changed files:"
+          cat changed.txt || true
+          echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
+          cat changed.txt >> $GITHUB_ENV || true
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run sync
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          CHANGED_FILES: ${{ env.CHANGED_FILES }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: python scripts/update_notion.py
