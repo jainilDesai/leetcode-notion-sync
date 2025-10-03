@@ -28,7 +28,7 @@ Below are the minimal steps required to get the wrapper working. Replace placeho
 
 I provided a Notion template you can duplicate to create your personal tracker.
 
-👉 Duplicate template: [YOUR_TEMPLATE_LINK_HERE](https://www.notion.so/26775205bf668059882bdee385eaa90d?v=26775205bf6681718892000c4b98b428&source)
+👉 Duplicate template: [TEMPLATE_LINK](https://www.notion.so/26775205bf668059882bdee385eaa90d?v=26775205bf6681718892000c4b98b428&source)
 
 After duplicating, note the Database ID (used later).
 
