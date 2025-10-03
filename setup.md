@@ -84,16 +84,6 @@ To enable it on your GitHub repo:
 
 ---
 
-## Demo & Screenshots
-
-(Add screenshots or GIFs here)
-
-- Example commit message: a screenshot or text sample
-- GitHub Actions log showing a successful sync
-- Notion table showing Problem, Difficulty, Tags
-
----
-
 ## Credits
 
 - Base project: LeetHub v2 (https://github.com/arunbhardwaj/LeetHub-2.0.git)
